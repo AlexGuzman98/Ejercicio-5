@@ -64,20 +64,24 @@ const actualizarDatos = () => {
       return response.json();
     })
     .then((data) => {
-      const chooseCoin = document.querySelector("select").value;
-      const USD_INFO = data.bpi.USD;
-      const GBP_INFO = data.bpi.GBP;
-      const EUR_INFO = data.bpi.EUR;
+        function actualizarMoneda() {
+          const chooseCoin = document.querySelector("select").value;
+          const USD_INFO = data.bpi.USD;
+          const GBP_INFO = data.bpi.GBP;
+          const EUR_INFO = data.bpi.EUR;
 
-      if(chooseCoin === 'USD'){
-        priceElement.innerHTML = `${USD_INFO.code}${USD_INFO.symbol} ${USD_INFO.rate}`;
+        if(chooseCoin === 'USD'){
+          priceElement.innerHTML = `${USD_INFO.code}${USD_INFO.symbol} ${USD_INFO.rate}`;
 
-      } else if( chooseCoin === 'GBP'){
-        priceElement.innerHTML = `${GBP_INFO.code}${GBP_INFO.symbol} ${GBP_INFO.rate}`;
-        
-      } else {
-        priceElement.innerHTML = `${EUR_INFO.code}${EUR_INFO.symbol} ${EUR_INFO.rate}`;
+        } else if( chooseCoin === 'GBP'){
+          priceElement.innerHTML = `${GBP_INFO.code}${GBP_INFO.symbol} ${GBP_INFO.rate}`;
+          
+        } else {
+          priceElement.innerHTML = `${EUR_INFO.code}${EUR_INFO.symbol} ${EUR_INFO.rate}`;
+        }
       }
+      actualizarDatos();
+      actualizarMoneda();
 
       // AQUI TENEMOS LA FECHA DENTRO DE data.time.updated
 
@@ -88,7 +92,6 @@ const actualizarDatos = () => {
       console.log("error", error);
     });
 };
-
 actualizarDatos();
 
 button.addEventListener("click", actualizarDatos);
